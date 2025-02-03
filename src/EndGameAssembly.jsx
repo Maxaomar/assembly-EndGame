@@ -1,37 +1,66 @@
 import { useState } from "react"
+import { clsx } from "clsx"
 import { languages } from "./languajes"
 
 
 export function EndGameAssembly() {
     const [currentWord, setCurrentWord] = useState("react");
+    const [guessedLetters, setguessedLetters] = useState([]);
 
     const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
+    function addGuessedLetter(letter) {
+        setguessedLetters(prevLetters =>
+            prevLetters.includes(letter) ?
+                prevLetters :
+                [...prevLetters, letter]
+        )
+    }
 
-    const languageElements = languages.map((lang) => {
+
+    const languageElements = languages.map(lang => {
         const styles = {
             backgroundColor: lang.backgroundColor,
             color: lang.color
         }
         return(
-            <span className="chip"
-                  style={styles}
-                  key={lang.name}
-            >
-                  {lang.name}
-            </span>
+            <span
+            className="chip"
+            style={styles}
+            key={lang.name}
+        >
+            {lang.name}
+        </span>
         )
     })
 
     const letterElements = currentWord.split("").map((letter, index) => (
-        <span key={index}>{letter.toUpperCase()}</span>
-    ))
+        <span key={index}>
+            {guessedLetters.includes(letter) ? letter.toUpperCase() : ""}
+        </span>
+        ))
 
 
 
-    const keyboardElements = alphabet.split("").map(letter => (
-        <button key={letter}>{letter.toUpperCase()}</button>
-    ))
+     const keyboardElements = alphabet.split("").map(letter => {
+        const isGuessed = guessedLetters.includes(letter)
+        const isCorrect = isGuessed && currentWord.includes(letter)
+        const isWrong = isGuessed && !currentWord.includes(letter)
+        const className = clsx({
+            correct: isCorrect,
+            wrong: isWrong
+        })
+
+        return(
+        <button
+            className={className}
+            key={letter}
+            onClick={() => addGuessedLetter(letter)}
+        >
+            {letter.toUpperCase()}
+        </button>
+        )
+})
 
 
     return(
