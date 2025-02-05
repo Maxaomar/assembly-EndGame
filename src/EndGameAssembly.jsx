@@ -7,6 +7,13 @@ export function EndGameAssembly() {
     const [currentWord, setCurrentWord] = useState("react");
     const [guessedLetters, setguessedLetters] = useState([]);
 
+
+
+    const wrongGuessesCount =
+        guessedLetters.filter(letter => !currentWord.includes(letter)).length
+
+        console.log(wrongGuessesCount)
+
     const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
     function addGuessedLetter(letter) {
