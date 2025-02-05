@@ -25,16 +25,20 @@ export function EndGameAssembly() {
     }
 
 
-    const languageElements = languages.map(lang => {
+    const languageElements = languages.map((lang, index) => {
+        const isLanguageLost = index < wrongGuessesCount
+
         const styles = {
             backgroundColor: lang.backgroundColor,
             color: lang.color
         }
+
+        const className = clsx("chip", isLanguageLost && "lost")
         return(
             <span
-            className="chip"
-            style={styles}
-            key={lang.name}
+                className={className}
+                style={styles}
+                key={lang.name}
         >
             {lang.name}
         </span>
