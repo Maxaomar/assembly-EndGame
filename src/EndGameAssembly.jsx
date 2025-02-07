@@ -12,7 +12,11 @@ export function EndGameAssembly() {
     const wrongGuessesCount =
         guessedLetters.filter(letter => !currentWord.includes(letter)).length
 
-        console.log(wrongGuessesCount)
+   const isGameWon =
+        currentWord.split("").every(letter => guessedLetters.includes(letter))
+
+   const isGameLost = wrongGuessesCount >= languages.length - 1
+   const isGameOver = isGameWon || isGameLost
 
     const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
@@ -74,6 +78,13 @@ export function EndGameAssembly() {
 })
 
 
+
+const gameStatusClass = clsx("game-status", {
+    won: isGameWon,
+    lost: isGameLost
+})
+
+
     return(
         <main>
             <header>
@@ -98,7 +109,7 @@ export function EndGameAssembly() {
             <section className="keyboard">
                 {keyboardElements}
             </section>
-            <button className="new-game">New Game</button>
+           {isGameOver && <button className="new-game">New Game</button> }
         </main>
     )
 }
