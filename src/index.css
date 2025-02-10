@@ -9,8 +9,6 @@ body{
   color: #D9D9D9;
   padding: 20px;
   height: 100vh;
-  display: flex;
-  justify-content: center;
 }
 
 main {
