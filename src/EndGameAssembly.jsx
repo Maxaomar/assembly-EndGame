@@ -74,6 +74,9 @@ export function EndGameAssembly() {
         <button
             className={className}
             key={letter}
+            disabled={isGameOver}
+            aria-disabled={guessedLetters.includes(letter)}
+            aria-label={`Letter ${letter}`}
             onClick={() => addGuessedLetter(letter)}
         >
             {letter.toUpperCase()}
@@ -126,9 +129,26 @@ function renderGameStatus() {
                 programming world safe from Assembly!</p>
             </header>
 
-            <section className={gameStatusClass}>
+            <section
+                 aria-live="polite"
+                 role="status"
+                 className={gameStatusClass}>
                 {renderGameStatus()}
             </section>
+
+
+            <section
+                className="sr-only"
+                aria-live="polite"
+                role="status"
+            >
+                <p>Current word: {currentWord.split("").map(letter =>
+                guessedLetters.includes(letter) ? letter + "." : "blank.")
+                .join(" ")}</p>
+
+            </section>
+
+
 
             <section className="language-chips">
                 {languageElements}

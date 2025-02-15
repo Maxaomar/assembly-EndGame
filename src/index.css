@@ -163,7 +163,10 @@ section.keyboard > button.wrong {
   background-color: #EC5D49;
 }
 
-
+section.keyboard > button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5
+}
 
 button.new-game {
   background-color: #11B5E5;
@@ -175,4 +178,18 @@ button.new-game {
   display: block;
   margin-inline: auto;
   cursor: pointer;
+}
+
+
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
