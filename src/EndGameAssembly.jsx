@@ -34,7 +34,7 @@ export function EndGameAssembly() {
 
     function startNewGame() {
         setCurrentWord(getRandomWord())
-        setGuessedLetters([])
+        setguessedLetters([])
     }
 
     
