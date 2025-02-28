@@ -136,6 +136,12 @@ section.word > span {
 }
 
 
+section.word > span.missed-letter {
+  color: #EC5D49;
+}
+
+
+
 section.keyboard {
   display: flex;
   flex-wrap: wrap;

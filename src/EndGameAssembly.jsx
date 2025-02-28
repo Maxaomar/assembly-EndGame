@@ -59,11 +59,19 @@ export function EndGameAssembly() {
         )
     })
 
-    const letterElements = currentWord.split("").map((letter, index) => (
-        <span key={index}>
+    const letterElements = currentWord.split("").map((letter, index) => {
+        const shouldRevealLetter = isGameLost || guessedLetters.includes(letter)
+
+        const letterClassName = clsx(
+            isGameLost && !guessedLetters.includes(letter) && "missed-letter"
+        )
+
+        return (
+        <span key={index} className="letterClassName">
             {guessedLetters.includes(letter) ? letter.toUpperCase() : ""}
         </span>
-        ))
+        )
+})
 
 
 
