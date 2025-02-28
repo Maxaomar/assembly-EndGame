@@ -9,15 +9,16 @@ export function EndGameAssembly() {
     const [guessedLetters, setguessedLetters] = useState([]);
 
 
-
+    // Derived values
+    const numGuessesLeft = languages.length - 1
     const wrongGuessesCount =
         guessedLetters.filter(letter => !currentWord.includes(letter)).length
 
    const isGameWon =
         currentWord.split("").every(letter => guessedLetters.includes(letter))
 
-   const isGameLost = wrongGuessesCount >= languages.length - 1
-   const isGameOver = isGameWon || isGameLost
+  const isGameLost = wrongGuessesCount >= numGuessesLeft
+  const isGameOver = isGameWon || isGameLost
    const lastGuessedLetter = guessedLetters[guessedLetters.length - 1]
     const isLastGuessIncorrect = lastGuessedLetter && !currentWord.includes(lastGuessedLetter)
 
@@ -71,7 +72,7 @@ export function EndGameAssembly() {
             {guessedLetters.includes(letter) ? letter.toUpperCase() : ""}
         </span>
         )
-})
+});
 
 
 
